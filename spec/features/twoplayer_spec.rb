@@ -15,11 +15,9 @@ feature 'Starting a new game' do
 
   scenario 'As Player2 I am asked to enter my name' do
     visit'/twoplayer'
-    fill_in('two_player_name', :with => 'Philip')
-    select('rock', :from => 'your_choice')
-    click_button('Play')
+    fill_in('player1_name', :with => 'Philip')
     visit'/twoplayer'
-    expect(page).to have_content "Player 2 Please enter your name"
+    expect(page).to have_no_content("Player 1 Please enter your name")
   end
 
 

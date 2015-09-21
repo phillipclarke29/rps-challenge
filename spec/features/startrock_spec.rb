@@ -22,6 +22,7 @@ feature 'Starting a new game' do
     visit '/'
     expect(page).to have_content "Would you like to try the two player game?"
   end
+  
 
 
 end

@@ -62,10 +62,25 @@ enable :sessions
   end
 
   get '/twoplayer' do
-    erb:twoplayer
+    @player1_name = session[:player1_name]
+    @player2_name = session[:player2_name]
+      if @player1_name && @player2_name
+        redirect('twoplayergame')
+      else
+        erb:twoplayer
+      end
   end
 
+  post '/twoplayer' do
+    session[:player1_name] = params[:player1_name]
+    session[:player2_name] = params[:player2_name]
+    redirect('/twoplayer')
+  end
 
+  get '/twoplayergame' do
+    erb:twoplayergame
+
+  end
 
   # start the server if ruby file executed directly
   run! if app_file == $0
