@@ -63,23 +63,35 @@ enable :sessions
 
   get '/twoplayer' do
     @player1_name = session[:player1_name]
-    @player2_name = session[:player2_name]
-      if @player1_name && @player2_name
-        redirect('twoplayergame')
-      else
-        erb:twoplayer
-      end
+    if @player1_name
+      redirect('/twoplayername')
+    else
+      erb:twoplayer
+    end
   end
 
   post '/twoplayer' do
     session[:player1_name] = params[:player1_name]
-    session[:player2_name] = params[:player2_name]
     redirect('/twoplayer')
   end
 
-  get '/twoplayergame' do
-    erb:twoplayergame
+  get '/twoplayername' do
+    @player2_name = session[:player2_name]
+    if @player2_name
+      redirect('twoplayergamestart')
+    else
+    erb:twoplayername
+    end
+  end
 
+  post '/twoplayername' do
+    session[:player2_name] = params[:player2_name]
+    redirect('/twoplayername')
+  end
+
+  get '/twoplayergamestart' do
+    @player3_name = session[:player1_name]
+    erb:twoplayergamestart
   end
 
   # start the server if ruby file executed directly
